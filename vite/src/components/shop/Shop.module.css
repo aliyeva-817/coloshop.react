@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.shop{
+    height: 700px;
+    background-image: url('https://preview.colorlib.com/theme/coloshop/images/slider_1.jpg');
+    padding: 210px;
+    margin-bottom: 27px;
+}
+
+.btn1{
+    width: 140px;
+    height: 40px;
+    background-color: rgb(254, 48, 48);
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    margin: 47px 0px;
+}
+
+.yazi{
+    font-size: 70px;
+    width: 700px;
+    font-weight: 500;
+    margin-top: 36px;
+}

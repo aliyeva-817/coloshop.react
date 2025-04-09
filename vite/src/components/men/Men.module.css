@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.men{
+    height: 400px;
+    width: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 100px;
+    
+ 
+  
+    
+    
+    background-image: url('https://preview.colorlib.com/theme/coloshop/images/deal_ofthe_week.png');
+
+}
+
+.btn1{
+    height: 40px;
+}
