@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Header from './components/header/Header'
 import Container from './components/container/Container'
@@ -11,6 +11,7 @@ import Letter from './components/letter/Letter'
 import Footer from './components/footer/Footer'
 import Box from './components/box/Box'
 import Son from './components/son/Son'
+import Deal from './components/deal/Deal'
 
 
 
@@ -19,23 +20,41 @@ import Son from './components/son/Son'
 const App = () => {
   const [data, setData] = useState([])
 
-  const getData =() =>{
-    axios.get('https://fakestoreapi.com/products')
-    .then(res=> setData(res.data))
-  }
+const getData = async () => {
+  const res = await axios.get('https://fakestoreapi.com/products')
+  setData(res.data)
+
+}
+
+useEffect( () => {
+  getData()
+}, [])
+
   return (
     <div>
       <Header/>
       <Shop/>
       <Card/>
-      <button onClick={() => getData()}>SHOW</button>
+      
       <div>
-        <div><h1 className='new'>New Arrivals</h1></div>
+        <div>
+          <h1 className='new'>New Arrivals</h1>
+          <div className='btns'>
+            <button className='btn'>ALL</button>
+            <button className='btn'>WOMEN'S</button>
+            <button className='btn'>ACCESSORIES</button>
+            <button className='btn'>MEN'S</button>
+          </div>
+          
+          </div>
       <div className='cards'>{data && data.map(item =><Container item={item}/>)}</div>
       </div>
+      <Deal/> 
       <Box/>
       <Section/>
       <Blog/>
+      
+     
       <Letter/>
       <Footer/>
       <Son/>

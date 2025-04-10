@@ -4,7 +4,7 @@ import styles from './Box.module.css'
 const Box = () => {
   return (
     <div className={styles.boxess}>
-        <div><h1>Best Sellers</h1></div>
+        <div><h1 className={styles.best}>Best Sellers</h1></div>
         <div className={styles.boxes}>
 
         <div className={styles.box}>

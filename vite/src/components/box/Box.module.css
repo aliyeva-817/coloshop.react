@@ -17,6 +17,9 @@
     }
 }
 
+.best{
+    font-size: 44px;
+}
 .boxes{
     display: flex;
     justify-content: center;
