@@ -1,63 +1,57 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Header from './components/header/Header'
-import Container from './components/container/Container'
 import './App.css'
-import Shop from './components/shop/Shop'
-import Card from './components/card/Card'
-import Blog from './components/blog/Blog'
-import Section from './components/section/Section'
-import Letter from './components/letter/Letter'
-import Footer from './components/footer/Footer'
-import Box from './components/box/Box'
-import Son from './components/son/Son'
-import Deal from './components/deal/Deal'
-
-
-
-
+import {useNavigate} from 'react-router'
 
 const App = () => {
+
   const [data, setData] = useState([])
 
-const getData = async () => {
-  const res = await axios.get('https://fakestoreapi.com/products')
-  setData(res.data)
+  useEffect(() => {
+    axios.get('https://fakestoreapi.com/products')
+    .then(res => {
+      setData(res.data)
+    })
+  },[])
 
-}
 
-useEffect( () => {
-  getData()
-}, [])
+  const navigate = useNavigate()
 
+  const addToBasket = (item) => {
+    let basket=JSON.parse(localStorage.getItem('basket')) ||[]
+    let secilenmehsul=basket.find(x => x.id==item.id)
+
+    if(secilenmehsul){
+      secilenmehsul.count +=1
+    }else{
+      basket=[...basket,{...item,count:1}]
+    }
+    localStorage.setItem('basket',JSON.stringify(basket))
+  }
+
+
+  const addToFavori = (item) => {
+    let favori=JSON.parse(localStorage.getItem('favori')) || []
+    favori = [...favori, item]
+    localStorage.setItem('favori', JSON.stringify(favori))
+  }
   return (
-    <div>
-      <Header/>
-      <Shop/>
-      <Card/>
-      
-      <div>
-        <div>
-          <h1 className='new'>New Arrivals</h1>
-          <div className='btns'>
-            <button className='btn'>ALL</button>
-            <button className='btn'>WOMEN'S</button>
-            <button className='btn'>ACCESSORIES</button>
-            <button className='btn'>MEN'S</button>
-          </div>
-          
-          </div>
-      <div className='cards'>{data && data.map(item =><Container item={item}/>)}</div>
+    <div className='cards'>
+      <div className='btns'>
+      <button className='box' onClick={()=> navigate('/basket')}>basket</button>
+      <button className='box' onClick={()=> navigate('/favori')}>favori</button>
       </div>
-      <Deal/> 
-      <Box/>
-      <Section/>
-      <Blog/>
-      
-     
-      <Letter/>
-      <Footer/>
-      <Son/>
+      <div className='cardss'>
+      {data && data.map( item => {
+        return <div className='card'>
+          <img src={item.image} alt="" />
+          <span>{item.price}</span>
+          <button className='btn' onClick={() => addToBasket(item)}>Sebete ekle</button>
+          <button className='btn' onClick={() => addToFavori(item)}>Favorilere ekle</button>
+        </div>
+
+      })}
+      </div>
     </div>
   )
 }
